@@ -75,7 +75,8 @@ WHERE ${bgName} AND ${personId}
 |电话（公司信息）|tel|
 |传真|fax|
 |电子邮箱（公司信息）|email|
-|联系人|linkman|
+|邮编|zip_code|
+|姓名|linkman|
 |电话（联系人信息）|linkman_tel|
 |电子邮箱（联系人信息）|linkman_email|
 
