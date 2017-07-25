@@ -84,7 +84,7 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 ##### 界面逻辑
 |规则|描述|
 |:---:|---|
-|打开|依据erpId从数据库中获取到bgName／appName／levelName／adminPersonId，并填入对应的field内|
+|打开|依据erpId从数据库中获取到bgName／appName／levelName／adminPersonId，并填入对应的field内，同时返回bgId用于管理员的动态对象传入参数|
 |选择管理员|动态对象的选择，展现：[employeeNumber]nickname，提交：personId|
 |设置|提交erpId和adminPersonId，依据erpId修改对应adminPersonId，并需要把其保存到日志表tzpf_erp_admin_change_log|
 |设置错误|提示错误信息|
