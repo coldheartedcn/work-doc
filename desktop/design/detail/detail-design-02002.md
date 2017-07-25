@@ -22,7 +22,7 @@
 ##### 条件元素
 |ID|名称|是否必填|查询类型|字段|备注|
 |---|---|:-----:|:-----:|---|---|
-|bgId|企业名称|否|精准查询|tb.bg_id|动态对象——[企业信息(BA)](./dynobj/企业信息(BA).md)——CODELABEL2ID|
+|bgId|企业名称|否|精准查询|tb.bg_id|动态对象——[企业信息(BA)](dynobj/企业信息(BA).md)——CODELABEL2ID|
 |appId|应用名称|否|精确查询|tah.app_id|动态对象——[应用信息(BA)](dynobj/应用信息(BA).md)——CODELABEL2ID|
 
 ##### SQL:
@@ -79,7 +79,7 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 |企业名称|bgName| |
 |应用名称|appName| |
 |应用级别|levelName| |
-|管理员|adminPersonId|动态对象——[人员账号_baId](dynobj/人员账号_baId.md)——CODELABEL2ID|
+|管理员|adminPersonId|动态对象——[人员账号_bgId](dynobj/人员账号_bgId.md)——CODELABEL2ID|
 
 ##### 界面逻辑
 |规则|描述|
