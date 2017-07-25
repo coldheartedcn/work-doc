@@ -5,6 +5,8 @@
 ## 1、流程图
 ![](./img/2/2/企业应用管理流程图.png)
 
+图0-1
+
 ## 2、模块详细设计
 
 ### 2.1、企业应用查询模块
@@ -13,13 +15,15 @@
 #### 2.1.1、界面
 ![](./img/2/2/企业应用查询界面.png)
 
+图1-1
+
 #### 2.1.2、业务规则
 
 ##### 条件元素
-|名称|是否必填|查询类型|字段|备注|
-|---|:-----:|:-----:|---|---|
-|企业名称|否|精准查询|bg_id|动态对象——企业信息(BA)——CODELABEL2ID|
-|应用名称|否|精确查询|app_id|动态对象——应用信息(BA)——CODELABEL2ID|
+|ID|名称|是否必填|查询类型|字段|备注|
+|---|---|:-----:|:-----:|---|---|
+|bgId|企业名称|否|精准查询|tb.bg_id|动态对象——[企业信息(BA)](./dynobj/企业信息(BA).md)——CODELABEL2ID|
+|appId|应用名称|否|精确查询|tah.app_id|动态对象——[应用信息(BA)](dynobj/应用信息(BA).md)——CODELABEL2ID|
 
 ##### SQL:
 ```
@@ -42,16 +46,16 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 ```
 
 ##### 字段元素
-|字段|名称|隐藏|
+|字段|名称|hidden|
 |:---:|:---:|:---:|
-|bgId|企业应用ID|是|
-|bgNo|企业编号|否|
-|bgName|企业名称|否|
-|appNo|应用编号|否|
-|appName|应用名称|否|
-|levelNo|应用级别编号|否|
-|levelName|应用级别名称|否|
-|nickname|企业应用管理员|否|
+|bgId|企业应用ID|true|
+|bgNo|企业编号|false|
+|bgName|企业名称|false|
+|appNo|应用编号|false|
+|appName|应用名称|false|
+|levelNo|应用级别编号|false|
+|levelName|应用级别名称|false|
+|nickname|企业应用管理员|false|
 
 ##### 右击菜单逻辑
 |菜单|操作逻辑|
@@ -59,26 +63,30 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 |设置企业应用管理员|打开设置企业应用管理员界面，传输条件erpId|
 
 ### 2.2、设置企业应用管理员界面
+主键为erpId，所有的操作以erpId进行贯穿
 
-#### 2.3.1、界面
-![](./img/设置企业管理员界面.png)
+#### 2.2.1、界面
+![](./img/2/2/企业应用管理员界面.png)
 
-图3-1
+图2-1
 
-#### 2.3.2、业务规则
 
-##### 图3-1界面元素
-|名称|字段|备注
+#### 2.2.2、业务规则
+
+##### 图2-1界面元素
+|名称|字段|备注|
 |:---:|:---:|---|
-|企业名称|bg_name||
-|管理员|admin_person_id|动态对象——人员帐号——CODELABEL2ID|
+|企业名称|bgName| |
+|应用名称|appName| |
+|应用级别|levelName| |
+|管理员|adminPersonId|动态对象——[人员账号_baId](dynobj/人员账号_baId.md)——CODELABEL2ID|
 
 ##### 界面逻辑
 |规则|描述|
 |:---:|---|
-|打开|依据bgId从数据库中获取到bg_name和admin_person_id，并填入对应的field内|
+|打开|依据erpId从数据库中获取到bgName／appName／levelName／adminPersonId，并填入对应的field内|
 |选择管理员|动态对象的选择，展现：[employeeNumber]nickname，提交：personId|
-|设置|提交bgId和adminPersonId，依据bgId修改对应adminPersonId，并需要把其保存到日志表tzpf_bg_admin_change_log|
+|设置|提交erpId和adminPersonId，依据erpId修改对应adminPersonId，并需要把其保存到日志表tzpf_erp_admin_change_log|
 |设置错误|提示错误信息|
 |设置正确|提示设置成功，点击确定后关闭窗口，并刷新外面的查询|
 |关闭逻辑|关闭窗口|

@@ -70,10 +70,10 @@ WHERE tb.admin_person_id = ${session_person_id} AND ${bgName}
 |id|id|隐藏|
 |orgName|机构名称|text|
 |leaf|是否叶子|用于extjs树展现，隐藏|
-|orgCode|机构编号||
-|level|层级||
-|lastModifiedBy|最后修改人||
-|lastModifiedDate|最后修改日期||
+|orgCode|机构编号| |
+|level|层级| |
+|lastModifiedBy|最后修改人| |
+|lastModifiedDate|最后修改日期| |
 
 ##### 图2-1页面逻辑
 |规则|描述|
