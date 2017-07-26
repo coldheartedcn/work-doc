@@ -1,6 +1,7 @@
 # 企业应用管理
-- **功能：** 用于管理企业应用相关信息，现阶段只是用于企业应用管理员的设置
+- **功能：** 让企业管理员用于管理企业应用相关信息，现阶段只是用于企业应用管理员的设置
 - **使用角色：** 企业管理员
+- **Axure指向：** 2.2 企业应用查询
 
 ## 1、流程图
 ![](./img/2/2/企业应用管理流程图.png)
@@ -39,7 +40,7 @@ SELECT
 FROM tzpf_bg tb
   INNER JOIN tzpf_erp_header teh ON (teh.user_type = '1' AND teh.user_id = tb.bg_id)
   INNER JOIN tzpf_app_header tah ON (tah.app_status = '1' AND tah.app_id = teh.app_id)
-  INNER JOIN tzpf_app_level tal ON (tal.app_id = tah.app_id AND tal.level_id = teh.level_id)
+  INNER JOIN tzpf_app_level tal ON (tal.level_id = teh.level_id)
   LEFT JOIN v3_user vu ON (vu.person_id = teh.admin_person_id)
 WHERE tb.admin_person_id = ${session_personId} AND ${bgId} AND ${appId}
 ORDER BY tb.bg_no, tah.app_no, tal.level_no;
@@ -48,7 +49,7 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 ##### 字段元素
 |字段|名称|hidden|
 |:---:|:---:|:---:|
-|bgId|企业应用ID|true|
+|erpId|企业应用ID|true|
 |bgNo|企业编号|false|
 |bgName|企业名称|false|
 |appNo|应用编号|false|
@@ -60,7 +61,7 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 ##### 右击菜单逻辑
 |菜单|操作逻辑|
 |:---:|-----|
-|设置企业应用管理员|打开设置企业应用管理员界面，传输条件erpId|
+|设置企业应用管理员|打开[设置企业应用管理员界面](2.2、设置企业应用管理员界面)，传输条件erpId|
 
 ### 2.2、设置企业应用管理员界面
 主键为erpId，所有的操作以erpId进行贯穿
