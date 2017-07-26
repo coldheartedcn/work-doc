@@ -6,8 +6,6 @@
 ## 1、流程图
 ![](./img/1/4/企业应用管理流程图.png)
 
-图0-1
-
 ## 2、模块详细设计
 
 ### 2.1、企业应用查询模块
@@ -16,17 +14,16 @@
 #### 2.1.1、界面
 ![](./img/1/4/企业应用查询界面.png)
 
-图1-1
+#### 2.1.2、查询配置
+**条件元素**
 
-#### 2.1.2、业务规则
-
-##### 条件元素
 |ID|名称|是否必填|查询类型|字段|备注|
 |---|---|:-----:|:-----:|---|---|
 |bgId|企业名称|否|精准查询|tb.bg_id|动态对象——[企业信息(PA)](dynobj/企业信息(PA).md)——CODELABEL2ID|
 |appId|应用名称|否|精确查询|tah.app_id|动态对象——[应用信息(PA)](dynobj/应用信息(PA).md)——CODELABEL2ID|
 
-##### SQL:
+**SQL**
+
 ```
 SELECT
   teh.erp_id        AS erpId,--企业应用ID  隐藏
@@ -46,7 +43,8 @@ WHERE ${bgId} AND ${appId}
 ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 ```
 
-##### 字段元素
+**字段元素**
+
 |字段|名称|hidden|
 |:---:|:---:|:---:|
 |bgNo|企业编号|false|
@@ -57,35 +55,62 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 |levelName|应用级别名称|false|
 |nickname|企业应用管理员|false|
 
-##### 右击菜单逻辑
+**右击菜单逻辑**
 |菜单|操作逻辑|
 |:---:|-----|
-|新增|打开企业应用信息界面|
+|企业应用管理-新增|打开企业应用信息界面|
 
-### 2.2、企业应用信息界面
-用于新增企业应用，
+### 2.2、企业应用信息
+用于新增企业应用
 
 #### 2.2.1、界面
-![](./img/2/2/企业应用管理员界面.png)
-1
-图2-1
+![](./img/1/4/企业应用信息界面.png)
 
-#### 2.2.2、业务规则
+**界面元素**
 
-##### 图2-1界面元素
 |名称|字段|备注|
 |:---:|:---:|---|
-|企业名称|bgName| |
-|应用名称|appName| |
-|应用级别|levelName| |
+|企业名称|bgId|必填，动态对象——[企业信息(PA)](dynobj/企业信息(PA).md)——CODELABEL2ID|
+|应用名称|appId|必填，动态对象——[应用信息(PA)](dynobj/应用信息(PA).md)——CODELABEL2ID|
+|应用级别|levelId|必填，动态对象——[应用级别_appId](dynobj/应用级别_appId.md)——CODELABEL2ID|
 |管理员|adminPersonId|动态对象——[人员账号_bgId](dynobj/人员账号_bgId.md)——CODELABEL2ID|
 
-##### 界面逻辑
+**界面逻辑**
 |规则|描述|
 |:---:|---|
-|打开|依据erpId从数据库中获取到bgName／appName／levelName／adminPersonId，并填入对应的field内，同时返回bgId用于管理员的动态对象传入参数|
-|选择管理员|动态对象的选择，展现：[employeeNumber]nickname，提交：personId|
-|设置|提交erpId和adminPersonId，依据erpId修改对应adminPersonId，并需要把其保存到日志表tzpf_erp_admin_change_log|
-|设置错误|提示错误信息|
-|设置正确|提示设置成功，点击确定后关闭窗口，并刷新外面的查询|
+|打开|一个初始化的界面，不需要数据|
+|选择企业|动态对象的选择，展现[code]name，提交bgId。改变值后，修改管理员动态对象的bgId参数|
+|选择应用|动态对象的选择，展现[code]name，提交appId。改变值后，修改应用级别动态对象的appId参数|
+|选择应用级别|动态对象的选择，展现[code]name，提交levelId|
+|选择管理员|动态对象的选择，展现：[code]name，提交：adminPersonId|
+|保存|提交bgId、appId、levelId和adminPersonId，[p-保存企业应用信息](#p-保存企业应用信息)|
+|保存正确|提示"保存成功！"，点击确定后关闭窗口，并刷新外面的查询|
+|保存错误|提示错误信息|
 |关闭逻辑|关闭窗口|
+
+#### 2.2.2、数据逻辑
+|序号|逻辑名称|
+|:---:|---|
+|1|[p-保存企业应用信息](#p-保存企业应用信息)|
+
+* * * * * * * * * *
+
+#### p-保存企业应用信息
+**参数**
+
+|code|source|name|type|remark|
+|---|:---:|---|:---:|---|
+|bgId|param|企业ID|String| |
+|appId|param|应用ID|String| |
+|levelId|param|应用级别ID|String| |
+|adminPersonId|param|管理员ID|String|可以为空|
+
+**逻辑**  
+判断(bgId)(tzpf_bg)、(appId、levelId)(tzpf_app_level)、(adminpersonId)(v3_user)是否存在，不存在抛出业务异常。  
+新建TzpfErpHeader对象，赋值erpId(uuid)，userType(1)，userId(bgId)，appId(appId)，levelId(levelId)，applyType(1)，
+startDate(now)，adminPersonId(adminPersonId)。把对象保存进数据库。
+
+**返回**  
+RSResponse.SUCCESS
+
+* * * * * * * * * *

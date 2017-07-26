@@ -60,7 +60,7 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 
 |菜单|操作逻辑|
 |:---:|-----|
-|设置企业应用管理员|打开[设置企业应用管理员](#22设置企业应用管理员)，传输条件erpId|
+|企业应用管理-设置企业应用管理员|打开[设置企业应用管理员](#22设置企业应用管理员)，传输条件erpId|
 
 ### 2.2、设置企业应用管理员
 主键为erpId，所有的操作以erpId进行贯穿
@@ -84,8 +84,8 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 |打开|将[p-打开设置企业应用管理员界面](#p-打开设置企业应用管理员界面)返回的model数据填入对应的field内，同时将bgId设置到管理员的动态对象参数中|
 |选择管理员|动态对象的选择，展现：[employeeNumber]nickname，提交：personId|
 |设置|提交erpId和adminPersonId，[p-设置企业应用管理员](#p-设置企业应用管理员)|
+|设置正确|提示"设置成功！"，点击确定后关闭窗口，并刷新外面的查询|
 |设置错误|提示错误信息|
-|设置正确|提示"设置成功"，点击确定后关闭窗口，并刷新外面的查询|
 |关闭逻辑|关闭窗口|
 
 #### 2.2.2、数据逻辑
@@ -99,12 +99,11 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 #### p-打开设置企业应用管理员界面
 **参数**
 
-|code|source|name|type|
-|---|:---:|---|:---:|
-|erpId|path|企业应用ID|String|
+|code|source|name|type|remark|
+|---|:---:|---|:---:|---|
+|erpId|path|企业应用ID|String| |
 
-**逻辑**
-
+**逻辑**  
 依据erpId，从数据库获取bgId(tzpf_bg)、bgName(tzpf_bg)、appName(tzpf_app_header)、levelName(tzpf_app_level)、
 adminPersonId(tzpf_erp_header)，把这些数据放入model中返回给前台。
 
@@ -132,13 +131,12 @@ adminPersonId(tzpf_erp_header)，把这些数据放入model中返回给前台。
 |adminPersonId|param|管理员ID|String|可以为空|
 |operator|session|操作人员ID|String| |
 
-**逻辑**
+**逻辑**  
 判断erpId(tzpf_erp_header)、adminPersonId(v3_user)是否存在，不存在抛出业务异常。  
-依据erpId，获取对应的JPA对象TzpfErpHeader，把里面的adminPersonId的值保存为oriAdminPersonId(为空的话就存中文字"空")，然后把其设成参数中传入的。  
+依据erpId，获取对应的JPA对象TzpfErpHeader，把里面的adminPersonId的值保存为oriAdminPersonId(为空的话就存中文字"空")，然后把其设成参数中传入的值(可以为空)。  
 用erpId、oriAdminPersonId、adminPersonId(为空的话就存中文字"空")、operator创建对象TzpfErpAdminLog（其它字段补齐）存入数据库。
 
-**返回**
-
+**返回**  
 RSResponse.SUCCESS
 
 * * * * * * * * * *
