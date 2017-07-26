@@ -94,6 +94,8 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 |1|[p-打开设置企业应用管理员界面](#p-打开设置企业应用管理员界面)|
 |2|[p-设置企业应用管理员](#p-设置企业应用管理员)|
 
+* * * * * * * * * *
+
 ##### p-打开设置企业应用管理员界面
 **参数**
 
@@ -104,8 +106,7 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 **逻辑**
 
 依据erpId，从数据库获取bgId(tzpf_bg)、bgName(tzpf_bg)、appName(tzpf_app_header)、levelName(tzpf_app_level)、
-adminPersonId(tzpf_erp_header)，把这些数据放入model中返回给前台。  
-<font color="#FF0000" size = "6px">文字</font>
+adminPersonId(tzpf_erp_header)，把这些数据放入model中返回给前台。
 
 **返回**
 
