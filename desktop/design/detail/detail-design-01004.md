@@ -56,6 +56,7 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 |nickname|企业应用管理员|false|
 
 **右击菜单逻辑**
+
 |菜单|操作逻辑|
 |:---:|-----|
 |企业应用管理-新增|打开企业应用信息界面|
@@ -76,6 +77,7 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 |管理员|adminPersonId|动态对象——[人员账号_bgId](dynobj/人员账号_bgId.md)——CODELABEL2ID|
 
 **界面逻辑**
+
 |规则|描述|
 |:---:|---|
 |打开|一个初始化的界面，不需要数据|
