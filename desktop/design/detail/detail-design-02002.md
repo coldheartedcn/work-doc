@@ -105,7 +105,7 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 
 依据erpId，从数据库获取bgId(tzpf_bg)、bgName(tzpf_bg)、appName(tzpf_app_header)、levelName(tzpf_app_level)、
 adminPersonId(tzpf_erp_header)，把这些数据放入model中返回给前台。  
-<font color="#4590a3" size = "6px">文字</font>
+<font color="#FF0000" size = "6px">文字</font>
 
 **返回**
 
