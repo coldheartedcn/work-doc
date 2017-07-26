@@ -61,3 +61,31 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 |菜单|操作逻辑|
 |:---:|-----|
 |新增|打开企业应用信息界面|
+
+### 2.2、企业应用信息界面
+用于新增企业应用，
+
+#### 2.2.1、界面
+![](./img/2/2/企业应用管理员界面.png)
+1
+图2-1
+
+#### 2.2.2、业务规则
+
+##### 图2-1界面元素
+|名称|字段|备注|
+|:---:|:---:|---|
+|企业名称|bgName| |
+|应用名称|appName| |
+|应用级别|levelName| |
+|管理员|adminPersonId|动态对象——[人员账号_bgId](dynobj/人员账号_bgId.md)——CODELABEL2ID|
+
+##### 界面逻辑
+|规则|描述|
+|:---:|---|
+|打开|依据erpId从数据库中获取到bgName／appName／levelName／adminPersonId，并填入对应的field内，同时返回bgId用于管理员的动态对象传入参数|
+|选择管理员|动态对象的选择，展现：[employeeNumber]nickname，提交：personId|
+|设置|提交erpId和adminPersonId，依据erpId修改对应adminPersonId，并需要把其保存到日志表tzpf_erp_admin_change_log|
+|设置错误|提示错误信息|
+|设置正确|提示设置成功，点击确定后关闭窗口，并刷新外面的查询|
+|关闭逻辑|关闭窗口|
