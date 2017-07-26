@@ -96,7 +96,7 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 
 * * * * * * * * * *
 
-##### p-打开设置企业应用管理员界面
+#### p-打开设置企业应用管理员界面
 **参数**
 
 |code|source|name|type|
@@ -123,7 +123,7 @@ adminPersonId(tzpf_erp_header)，把这些数据放入model中返回给前台。
 
 * * * * * * * * * *
 
-##### p-设置企业应用管理员
+#### p-设置企业应用管理员
 **参数**
 
 |code|source|name|type|
