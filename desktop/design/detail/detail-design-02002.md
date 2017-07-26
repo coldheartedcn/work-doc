@@ -126,16 +126,16 @@ adminPersonId(tzpf_erp_header)，把这些数据放入model中返回给前台。
 #### p-设置企业应用管理员
 **参数**
 
-|code|source|name|type|
-|---|:---:|---|:---:|
-|erpId|param|企业应用ID|String|
-|adminPersonId|param|管理员ID|String|
-|operator|session|操作人员ID|String|
+|code|source|name|type|remark|
+|---|:---:|---|:---:|---|
+|erpId|param|企业应用ID|String| |
+|adminPersonId|param|管理员ID|String|可以为空|
+|operator|session|操作人员ID|String| |
 
 **逻辑**
-判断erpId(tzpf_erp_header)、adminPersonId(v3_user)是否存在，不存在抛出业务异常。
-依据erpId，获取对应的JPA对象TzpfErpHeader，把里面的adminPersonId的值保存为oriAdminPersonId（为空的话就存中文字"空"），然后把其设成参数中传入的。  
-用erpId、oriAdminPersonId、adminPersonId、operator创建对象TzpfErpAdminLog（其它字段补齐）存入数据库。
+判断erpId(tzpf_erp_header)、adminPersonId(v3_user)是否存在，不存在抛出业务异常。  
+依据erpId，获取对应的JPA对象TzpfErpHeader，把里面的adminPersonId的值保存为oriAdminPersonId(为空的话就存中文字"空")，然后把其设成参数中传入的。  
+用erpId、oriAdminPersonId、adminPersonId(为空的话就存中文字"空")、operator创建对象TzpfErpAdminLog（其它字段补齐）存入数据库。
 
 **返回**
 
