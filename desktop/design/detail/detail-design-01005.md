@@ -38,6 +38,8 @@ WHERE tbp.bg_id = tb.bg_id
       AND ${bgId} AND ${personId}
 ORDER BY bgNo, employeeNumber;
 ```
+_注意：_ 分页查询，每页100行
+
 
 **字段元素**
 
