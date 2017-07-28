@@ -59,7 +59,7 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 
 |菜单|操作逻辑|
 |:---:|-----|
-|企业应用管理-新增|打开企业应用信息界面|
+|企业应用管理-新增|打开[企业应用信息](#22企业应用信息)|
 
 ### 2.2、企业应用信息
 用于新增企业应用
@@ -108,7 +108,7 @@ ORDER BY tb.bg_no, tah.app_no, tal.level_no;
 |adminPersonId|param|管理员ID|String|可以为空|
 
 **逻辑**  
-判断(bgId)(tzpf_bg)、(appId、levelId)(tzpf_app_level)、(adminpersonId)(v3_user)是否存在，不存在抛出业务异常。  
+判断(bgId)(tzpf_bg)、(appId、levelId)(tzpf_app_level)、(adminPersonId)(v3_user)是否存在，不存在抛出业务异常。  
 新建TzpfErpHeader对象，赋值erpId(uuid)，userType(1)，userId(bgId)，appId(appId)，levelId(levelId)，applyType(1)，
 startDate(now)，adminPersonId(adminPersonId)。把对象保存进数据库。
 
