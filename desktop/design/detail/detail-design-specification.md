@@ -63,5 +63,11 @@ Desktop中角色包含：
     >
 
 # 3 功能描述
-## [3.1 企业管理](./detail-design-01001.md)
-## [3.2 机构管理](./detail-design-01002.md)
+## 平台管理员
+### [企业应用管理](detail-design-01004.md)
+### [企业人员管理](detail-design-01005.md)
+
+## 企业管理员
+### [企业应用管理](detail-design-02002.md)
+
+## 企业应用管理员
